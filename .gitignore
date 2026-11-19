@@ -1,8 +1,4 @@
-# Données
-data/raw/*
-data/processed/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
+
 
 # Index RAG et modèles
 rag/index/*
