@@ -88,6 +88,8 @@ def main():
     ap.add_argument("--profile", default="mixed", choices=list(PROFILES) + ["mixed"])
     ap.add_argument("--duration", type=int, default=1800)
     ap.add_argument("--seed", type=int, default=None)
+    ap.add_argument("--run-id", default=None)
+
     args = ap.parse_args()
     if args.seed is not None:
         random.seed(args.seed)
@@ -101,7 +103,8 @@ def main():
     print("Test transaction OK")
 
     os.makedirs("data/raw", exist_ok=True)
-    tl_path = f"data/raw/traffic_{datetime.now():%Y%m%d_%H%M%S}.csv"
+    run_id = args.run_id or f"{datetime.now():%Y%m%d_%H%M%S}"
+    tl_path = f"data/raw/traffic_{run_id}.csv"
     tl = open(tl_path, "w", newline=""); tw = csv.writer(tl)
     tw.writerow(["timestamp", "event", "profile", "mult"])
 

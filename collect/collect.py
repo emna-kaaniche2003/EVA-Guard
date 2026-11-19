@@ -21,7 +21,7 @@ FIELDS = [
     "p2p_log_warn", "p2p_log_error", "p2p_log_peer_search",
     # --- couche hôte ---
     "host_cpu_geth", "host_rss_geth_mb", "host_threads_geth", "host_fds_geth",
-    "host_cpu_sys", "host_mem_sys_pct", "host_load1", "host_lo_kbps",
+    "host_cpu_sys", "host_mem_sys_pct", "host_swap_pct", "host_load1", "host_lo_kbps",
     # --- couche API (RPC) ---
     "api_lat_blocknumber_ms", "api_lat_peercount_ms", "api_lat_getblock_ms",
     "api_lat_peers_ms", "api_ok_ratio", "api_block", "api_is_syncing",
@@ -113,6 +113,7 @@ def main():
     ap.add_argument("--duration", type=int, default=1800)
     ap.add_argument("--interval", type=float, default=5.0)
     ap.add_argument("--outdir", default="data/raw")
+    ap.add_argument("--run-id", default=None, help="identifiant commun du run (partagé avec traffic.py et les attaques)")
     args = ap.parse_args()
 
     proc = find_geth()
@@ -120,7 +121,8 @@ def main():
         print("ERREUR : processus Geth de node2 introuvable. Réseau démarré ?")
         return
     os.makedirs(args.outdir, exist_ok=True)
-    path = os.path.join(args.outdir, f"run_{args.label}_{datetime.now():%Y%m%d_%H%M%S}.csv")
+    run_id = args.run_id or f"{datetime.now():%Y%m%d_%H%M%S}"
+    path = os.path.join(args.outdir, f"run_{args.label}_{run_id}.csv")
     print(f"Écriture dans {path} (Ctrl+C pour arrêter)")
 
     # Amorçage (évite une première ligne fausse)
@@ -197,6 +199,7 @@ def main():
                     "host_threads_geth": thr, "host_fds_geth": fds,
                     "host_cpu_sys": psutil.cpu_percent(None),
                     "host_mem_sys_pct": psutil.virtual_memory().percent,
+                    "host_swap_pct": psutil.swap_memory().percent,
                     "host_load1": round(os.getloadavg()[0], 2), "host_lo_kbps": lo_kbps,
                     "api_lat_blocknumber_ms": round(l_blk, 1), "api_lat_peercount_ms": round(l_pc, 1),
                     "api_lat_getblock_ms": round(l_gb, 1), "api_lat_peers_ms": round(l_pe, 1),
@@ -218,3 +221,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

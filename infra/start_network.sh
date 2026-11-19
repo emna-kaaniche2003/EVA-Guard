@@ -11,7 +11,7 @@ get_enode() {
     | jq -r .result.enode 2>/dev/null | sed 's/@[^:]*:/@127.0.0.1:/; s/?.*//'
 }
 
-COMMON="--networkid 12345 --nat none --netrestrict 127.0.0.0/8 \
+COMMON="--networkid 12345 --nat none --netrestrict 127.0.0.0/8 --cache 128 \
   --http --http.addr 127.0.0.1 --http.api eth,net,web3,admin,txpool \
   --metrics --metrics.addr 127.0.0.1"
 
