@@ -1,0 +1,27 @@
+
+=== contamination = 0.01 ===
+merged_dos_p2p_high_dos_high_01.csv        recall: 0.00 | faux positifs: 0.000 (4)
+merged_dos_p2p_low_dos_low_01.csv          recall: 0.00 | faux positifs: 0.000 (4)
+merged_dos_p2p_medium_dos_medium_01.csv    recall: 0.00 | faux positifs: 0.000 (4)
+merged_dos_test_dostest01.csv              recall: 0.00 | faux positifs: 0.000 (2)
+merged_eclipse_test_eclipsetest01.csv      recall: 0.06 | faux positifs: 0.000 (5)
+run_normal_mixed2_20261119_094757.csv      recall:  -  | faux positifs: 0.000 (359)
+run_normal_mixed_20261119_085512.csv       recall:  -  | faux positifs: 0.003 (359)
+
+=== contamination = 0.03 ===
+merged_dos_p2p_high_dos_high_01.csv        recall: 0.43 | faux positifs: 0.000 (4)
+merged_dos_p2p_low_dos_low_01.csv          recall: 0.03 | faux positifs: 0.000 (4)
+merged_dos_p2p_medium_dos_medium_01.csv    recall: 0.02 | faux positifs: 0.000 (4)
+merged_dos_test_dostest01.csv              recall: 0.18 | faux positifs: 0.000 (2)
+merged_eclipse_test_eclipsetest01.csv      recall: 0.09 | faux positifs: 0.400 (5)
+run_normal_mixed2_20261119_094757.csv      recall:  -  | faux positifs: 0.017 (359)
+run_normal_mixed_20261119_085512.csv       recall:  -  | faux positifs: 0.025 (359)
+
+=== contamination = 0.05 ===
+merged_dos_p2p_high_dos_high_01.csv        recall: 0.97 | faux positifs: 0.000 (4)
+merged_dos_p2p_low_dos_low_01.csv          recall: 0.03 | faux positifs: 0.000 (4)
+merged_dos_p2p_medium_dos_medium_01.csv    recall: 0.98 | faux positifs: 0.000 (4)
+merged_dos_test_dostest01.csv              recall: 0.94 | faux positifs: 0.000 (2)
+merged_eclipse_test_eclipsetest01.csv      recall: 0.22 | faux positifs: 0.800 (5)
+run_normal_mixed2_20261119_094757.csv      recall:  -  | faux positifs: 0.058 (359)
+run_normal_mixed_20261119_085512.csv       recall:  -  | faux positifs: 0.070 (359)

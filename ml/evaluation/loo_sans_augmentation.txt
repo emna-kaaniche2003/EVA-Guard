@@ -1,0 +1,14 @@
+merged_dos_p2p_high_dos_high_01.csv
+   recall attaque: 1.00 (37 lignes) | faux positifs: 0.000 (4 lignes)
+merged_dos_p2p_low_dos_low_01.csv
+   recall attaque: 0.00 (37 lignes) | faux positifs: 0.000 (4 lignes)
+merged_dos_p2p_medium_dos_medium_01.csv
+   recall attaque: 1.00 (49 lignes) | faux positifs: 0.000 (4 lignes)
+merged_dos_test_dostest01.csv
+   recall attaque: 1.00 (17 lignes) | faux positifs: 0.000 (2 lignes)
+merged_eclipse_test_eclipsetest01.csv
+   recall attaque: 0.00 (32 lignes) | faux positifs: 0.000 (5 lignes)
+run_normal_mixed2_20261119_094757.csv
+   recall attaque: nan (0 lignes) | faux positifs: 0.000 (359 lignes)
+run_normal_mixed_20261119_085512.csv
+   recall attaque: nan (0 lignes) | faux positifs: 0.000 (359 lignes)

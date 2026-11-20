@@ -1,0 +1,63 @@
+# ATTENTION : premier test (ancien modele, avant corrections). Le resultat final est dans loo_final.txt
+
+===== rf =====
+              precision    recall  f1-score   support
+
+      normal      1.000     1.000     1.000       365
+      attack      1.000     1.000     1.000        54
+
+    accuracy                          1.000       419
+   macro avg      1.000     1.000     1.000       419
+weighted avg      1.000     1.000     1.000       419
+
+Matrice de confusion :
+ [[365   0]
+ [  0  54]]
+Par fichier :
+  merged_dos_p2p_high_dos_high_01.csv: recall attaque = 1.00
+  merged_dos_test_dostest01.csv: recall attaque = 1.00
+  run_normal_mixed2_20261119_094757.csv: taux de faux positifs = 0.000
+
+===== xgb =====
+              precision    recall  f1-score   support
+
+      normal      0.955     1.000     0.977       365
+      attack      1.000     0.685     0.813        54
+
+    accuracy                          0.959       419
+   macro avg      0.978     0.843     0.895       419
+weighted avg      0.961     0.959     0.956       419
+
+Matrice de confusion :
+ [[365   0]
+ [ 17  37]]
+Par fichier :
+  merged_dos_p2p_high_dos_high_01.csv: recall attaque = 1.00
+  merged_dos_test_dostest01.csv: recall attaque = 0.00
+  run_normal_mixed2_20261119_094757.csv: taux de faux positifs = 0.000
+
+===== iso =====
+              precision    recall  f1-score   support
+
+      normal      0.994     0.912     0.951       365
+      attack      0.619     0.963     0.754        54
+
+    accuracy                          0.919       419
+   macro avg      0.807     0.938     0.853       419
+weighted avg      0.946     0.919     0.926       419
+
+Matrice de confusion :
+ [[333  32]
+ [  2  52]]
+Par fichier :
+  merged_dos_p2p_high_dos_high_01.csv: recall attaque = 0.97
+  merged_dos_test_dostest01.csv: recall attaque = 0.94
+  run_normal_mixed2_20261119_094757.csv: taux de faux positifs = 0.089
+
+===== Temps de détection =====
+rf | merged_dos_p2p_high_dos_high_01.csv: détectée après 0 s
+rf | merged_dos_test_dostest01.csv: détectée après 0 s
+xgb | merged_dos_p2p_high_dos_high_01.csv: détectée après 0 s
+xgb | merged_dos_test_dostest01.csv: attaque jamais détectée
+iso | merged_dos_p2p_high_dos_high_01.csv: détectée après 5 s
+iso | merged_dos_test_dostest01.csv: détectée après 5 s

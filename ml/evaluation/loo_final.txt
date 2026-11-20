@@ -1,0 +1,22 @@
+29 features
+merged_dos_p2p_high_dos_high_01.csv        recall: 1.00 (37) | FP: 0.000 (4)
+merged_dos_p2p_low_dos_low_01.csv          recall: 1.00 (37) | FP: 0.000 (4)
+merged_dos_p2p_medium_dos_medium_01.csv    recall: 1.00 (49) | FP: 0.000 (4)
+merged_dos_test_dostest01.csv              recall: 1.00 (17) | FP: 0.000 (2)
+run_normal_mixed2_20261119_094757.csv      recall:  -  (0) | FP: 0.000 (359)
+run_normal_mixed_20261119_085512.csv       recall:  -  (0) | FP: 0.000 (359)
+
+=== Métriques globales (out-of-fold, 6 fichiers) ===
+Accuracy : 1.0
+              precision    recall  f1-score   support
+
+      normal      1.000     1.000     1.000       732
+      attack      1.000     1.000     1.000       140
+
+    accuracy                          1.000       872
+   macro avg      1.000     1.000     1.000       872
+weighted avg      1.000     1.000     1.000       872
+
+Matrice de confusion :
+ [[732   0]
+ [  0 140]]
