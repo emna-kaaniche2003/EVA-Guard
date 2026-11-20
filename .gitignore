@@ -3,8 +3,6 @@
 # Index RAG et modèles
 rag/index/*
 !rag/index/.gitkeep
-ml/models/*.pkl
-ml/models/*.joblib
 
 # Python
 __pycache__/
