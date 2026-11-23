@@ -6,7 +6,17 @@ import pandas as pd
 
 rf = joblib.load("ml/models/rf_dos_final.joblib")
 feats = joblib.load("ml/models/features_final.joblib")
+import math
 
+def _clean_json(d: dict) -> dict:
+    """Remplace NaN/inf par None pour avoir un JSON valide."""
+    out = {}
+    for k, v in d.items():
+        if isinstance(v, float) and (math.isnan(v) or math.isinf(v)):
+            out[k] = None
+        else:
+            out[k] = v
+    return out
 
 def prepare(df):
     """Même nettoyage et mêmes features qu'à l'entraînement."""
@@ -46,7 +56,32 @@ def detect(df):
     out[dos == 1] = "dos_p2p"
     out[df["p2p_all_inbound"] == 1] = "eclipse"   # la règle Eclipse est prioritaire
     return out
+def detect_one(sample: dict) -> dict:
+    """
+    Détection sur un seul échantillon de mesures (dict), pour usage temps réel.
+    Entrée  : dict avec les colonnes p2p_*, host_*, api_* (une ligne de capteurs).
+    Sortie  : dict standardisé, prêt à être transmis à l'agent d'interprétation.
+    """
+    df = pd.DataFrame([sample])
+    prepared = prepare(df)
 
+    is_eclipse = bool(prepared["p2p_all_inbound"].iloc[0] == 1)
+    if is_eclipse:
+        hypothese, score, methode = "eclipse", 1.0, "regle_p2p_all_inbound"
+    else:
+        proba = float(rf.predict_proba(prepared[feats])[0][1])
+        if proba >= 0.5:
+            hypothese, score, methode = "dos_p2p", proba, "random_forest"
+        else:
+            hypothese, score, methode = "normal", proba, "random_forest"
+
+    return {
+        "timestamp": sample.get("timestamp"),
+        "hypothese": hypothese,              # normal | dos_p2p | eclipse
+        "score": round(score, 3),            # confiance du détecteur (0 à 1)
+        "methode": methode,                  # quel composant a décidé
+        "mesures": _clean_json(sample),                    # toutes les valeurs brutes (pour l'agent suivant)
+    }
 
 if __name__ == "__main__":
     path = sys.argv[1]
