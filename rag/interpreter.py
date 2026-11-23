@@ -38,6 +38,7 @@ class MLAlert:
     baseline: dict[str, float] = field(default_factory=dict)        # moyenne "normale" (optionnel mais recommandé)
     timestamp: str = ""
     node_id: str = "node-1"
+    method: str = "" 
 
 
 @dataclass
@@ -103,9 +104,14 @@ Règles strictes :
    aucune valeur, aucun seuil. Si le contexte est insuffisant, réponds "UNKNOWN".
 3. Les types possibles sont : ECLIPSE (isolement/pairs/churn/retard de sync), DOS_P2P (flooding P2P :
    débit, CPU, mémoire, latence, erreurs), BENIGN (faux positif / comportement normal), UNKNOWN.
-4. Dans "evidence_to_verify", liste les preuves INDÉPENDANTES à vérifier (réseau, système, RPC) qui
+4.Si la méthode est une règle heuristique (regle_p2p_all_inbound), c'est un simple indice, pas un modèle :
+   il peut produire des faux positifs.
+   Les valeurs fournies sont celles d'UN SEUL échantillon : ne conclus pas sur une tendance (ex. dérive du sync lag).
+5a.Dans "evidence_to_verify", liste les preuves INDÉPENDANTES à vérifier (réseau, système, RPC) qui
    confirmeraient ou infirmeraient ton hypothèse. Utilise des noms de métriques existants.
-5. Réponds UNIQUEMENT avec un objet JSON valide, en français, sans texte autour, au format :
+5b. Quand une fiche de niveau « experimental » (mesurée sur le banc) contredit une fiche « theoretical »,
+    la fiche expérimentale prévaut pour ce noeud.
+6. Réponds UNIQUEMENT avec un objet JSON valide, en français, sans texte autour, au format :
 {
   "hypothesis": "ECLIPSE|DOS_P2P|BENIGN|UNKNOWN",
   "confidence": 0.0-1.0,
@@ -123,7 +129,7 @@ def build_user_prompt(alert: MLAlert, context: str) -> str:
     probs = ", ".join(f"{k}={v:.2f}" for k, v in alert.probabilities.items()) or "n/a"
     return f"""ALERTE ML
 - noeud : {alert.node_id} | horodatage : {alert.timestamp or 'n/a'}
-- prédiction ML : {alert.predicted_attack}
+- prédiction du détecteur : {alert.predicted_attack} (méthode : {alert.method or 'n/a'})
 - score d'anomalie : {alert.anomaly_score:.3f}
 - probabilités : {probs}
 

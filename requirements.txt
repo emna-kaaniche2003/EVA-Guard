@@ -3,3 +3,7 @@ chromadb
 sentence-transformers
 groq
 pytest
+pandas
+numpy
+scikit-learn
+joblib
