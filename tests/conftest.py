@@ -5,7 +5,7 @@ import pytest
 from rag.embeddings import get_embedding_function
 from rag.ingest import build
 
-DATA = Path(__file__).resolve().parent.parent / "data"
+DATA = Path(__file__).resolve().parent.parent / "rag" / "data"
 
 
 @pytest.fixture(scope="session")

@@ -1,0 +1,5 @@
+# torch : pip install torch --index-url https://download.pytorch.org/whl/cpu
+chromadb
+sentence-transformers
+groq
+pytest
