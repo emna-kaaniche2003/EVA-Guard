@@ -23,4 +23,7 @@ keystore/
 pwd.txt
 *.ipc
 infra/genesis.json
+
 .env
+
+ml/data/
